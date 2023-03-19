@@ -2,6 +2,7 @@ export default class Player {
     constructor(posY, posX) {
         this.posX = posX;
         this.posY = posY;
+        this.moves = 0;
     }
 
     moveUp(tempMap) {
@@ -40,6 +41,8 @@ export default class Player {
         if(updatePos){
             this.posX = newPosX;
             this.posY = newPosY;
+            this.moves += 1;
+            console.log(this.moves);
         }
     }
 

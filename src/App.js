@@ -19,9 +19,12 @@ class Board extends React.Component {
   
   render() {
     return (
-      <div class='board'>
-        {this.createMap()}
-      </div>
+      <>
+        <div class='info'><p>Moves: {this.state.player.moves}</p></div>
+        <div class='board'>
+          {this.createMap()}
+        </div>
+      </>
     );
   }
 
