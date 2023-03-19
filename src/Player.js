@@ -3,6 +3,8 @@ export default class Player {
         this.posX = posX;
         this.posY = posY;
         this.moves = 0;
+        this.freeSpace = ['S', 'T', 'F'];
+        this.prevTile = 'S';
     }
 
     moveUp(tempMap) {
@@ -23,49 +25,60 @@ export default class Player {
 
     checkTile(newPosY, newPosX, tempMap) {
         let tile = tempMap[newPosY][newPosX];
-        let updatePos = true;
+        let update = true;
         switch(tile){
             case ' ':
                 return;
             case 'S':
-                updatePos = this.moveNormal(newPosY, newPosX, tempMap);
+                update = this.moveNormal(newPosY, newPosX, tempMap);
+                break;
+            case 'T':
+                update = this.moveNormal(newPosY, newPosX, tempMap);
+                break;
+            case 'F':
+                update = this.moveNormal(newPosY, newPosX, tempMap);
                 break;
             case 'R':
-                updatePos = this.moveRock(newPosY, newPosX, tempMap);
+                update = this.moveRock(newPosY, newPosX, tempMap);
                 break;
             case 'P':
                 break;
             default:
                 return;
         }
-        if(updatePos){
+        if(update){
             this.posX = newPosX;
             this.posY = newPosY;
             this.moves += 1;
-            console.log(this.moves);
         }
     }
 
     moveRock(newPosY, newPosX, tempMap) {
         let rockPosY = newPosY+(newPosY-this.posY);
         let rockPosX = newPosX+(newPosX-this.posX);
-        if(tempMap[rockPosY][rockPosX] === 'S'){
-            this.setSpace(this.posY, this.posX, tempMap);
+        if(this.freeSpace.includes(tempMap[rockPosY][rockPosX])){
+            this.setBack(this.posY, this.posX, tempMap);
+            this.prevTile = 'S';
             this.setPlayer(newPosY, newPosX, tempMap);
-            tempMap[rockPosY][rockPosX] = 'R';
+            if(tempMap[rockPosY][rockPosX] === 'T'){
+                tempMap[rockPosY][rockPosX] = 'L';
+            }else{
+                tempMap[rockPosY][rockPosX] = 'R';
+            }
             return true;
         }
         return false;
     }
 
     moveNormal(newPosY, newPosX, tempMap) {
-        this.setSpace(this.posY, this.posX, tempMap);
+        this.setBack(this.posY, this.posX, tempMap);
+        this.prevTile = tempMap[newPosY][newPosX];
         this.setPlayer(newPosY, newPosX, tempMap);
         return true;
     }
 
-    setSpace(posY, posX, map) {
-        map[posY][posX] = 'S';
+    setBack(posY, posX, map) {
+        map[posY][posX] = this.prevTile;
     }
 
     setPlayer(posY, posX, map) {

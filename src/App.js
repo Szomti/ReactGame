@@ -3,8 +3,11 @@ import './App.css';
 import PlayerTile from './tiles/PlayerTile';
 import Player from './Player'
 import RockTile from './tiles/RockTile';
+import TargetTile from './tiles/TargetTile';
+import LockedRockTile from './tiles/LockedRockTile';
 import SpaceTile from  './tiles/SpaceTile';
 import WallTile from './tiles/WallTile';
+import FakeWallTile from './tiles/FakeWallTile';
 import Maps from './maps/Maps';
 
 class Board extends React.Component {
@@ -13,14 +16,22 @@ class Board extends React.Component {
     this.state = {
       map: Maps.mapA,
       player: new Player(1, 1),
+      won: false,
     }
-    document.addEventListener('keypress', (event) => this.playerAction(event.code));
+    this.targets = this.targetsToWin('T');
+    document.addEventListener('keypress', (event) => {
+      event.preventDefault();
+      this.playerAction(event.code);
+    });
   }
   
   render() {
     return (
       <>
-        <div class='info'><p>Moves: {this.state.player.moves}</p></div>
+        <div class='info'>
+          <p>Moves: {this.state.player.moves}</p>
+          <p>Progress: {this.targetsToWin('L')}/{this.targets}</p>
+        </div>
         <div class='board'>
           {this.createMap()}
         </div>
@@ -31,6 +42,8 @@ class Board extends React.Component {
   playerAction(keyCode) {
     let tempMap = this.state.map;
     let player = this.state.player;
+    
+    let forUpdate = player.moves;
     switch(keyCode){
       case 'KeyW':
         player.moveUp(tempMap);
@@ -47,9 +60,22 @@ class Board extends React.Component {
       default:
         return;
     }
-    this.setState({
-      player: player
+    if(forUpdate<player.moves){
+      this.setState({
+        player: player
+      });
+      if(this.targetsToWin('L') == this.targets){
+        alert('You Won!');
+      }
+    }
+  }
+
+  targetsToWin(search) {
+    let count = 0;
+    this.state.map.forEach(row => {
+      count += row.filter(tile => tile === search).length;
     });
+    return count;
   }
 
   createMap() {
@@ -58,10 +84,16 @@ class Board extends React.Component {
         switch(tile){
           case ' ':
             return <WallTile key={index}/>;
+          case 'F':
+            return <FakeWallTile key={index}/>;
           case 'S':
             return <SpaceTile key={index}/>;
           case 'R':
             return <RockTile key={index}/>;
+          case 'L':
+            return <LockedRockTile key={index}/>;
+          case 'T':
+            return <TargetTile key={index}/>;
           case 'P':
             return <PlayerTile key={index}/>;
           default:

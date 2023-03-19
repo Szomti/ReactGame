@@ -3,12 +3,22 @@
   background: #999999;
 }
 
+.fake-wall-tile {
+  outline: #898989 solid 1px;
+  background: #A9A9A9;
+}
+
+.fake-wall-tile:hover {
+  outline: #c5c5c5 solid 1px;
+  background: #cecece;
+}
+
 .space-tile {
   outline: #DFDFDF solid 1px;
   background: #EEEEEE;
 }
 
-.rock-tile {
+.rock-tile, .locked-rock-tile {
   border: #AFAFAF solid 1px;
   background: #BFBFBF;
   border-radius: 20%;
@@ -22,11 +32,25 @@
   background: #CFCFCF;
 }
 
+.locked-rock-tile, .locked-rock-tile:hover {
+  background: #909090;
+  border: #858585 solid 1px;
+}
+
+.target-tile {
+  background: #ffa5a5;
+  font-family: Courier, monospace;
+  font-weight: bold;
+  font-size: x-large;
+  user-select: none;
+}
+
 .tile {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: flex;
+  align-items: center;
   justify-content: center;
   text-align: center;
   width: 30px;
