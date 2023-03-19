@@ -64,7 +64,7 @@
   background: #BBBBFF;
   width: 12px;
   height: 15px;
-  border-radius: 18%;
+  border-radius: 18% 18% 0% 0%;
 }
 
 .board {

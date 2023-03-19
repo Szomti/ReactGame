@@ -7,18 +7,14 @@ import SpaceTile from  './tiles/SpaceTile';
 import WallTile from './tiles/WallTile';
 import Maps from './maps/Maps';
 
-
 class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       map: Maps.mapA,
-      initialized: 0,
-      player: new Player(1, 1)
+      player: new Player(1, 1),
     }
-    document.addEventListener('keyup', (event) => {
-      this.playerAction(event.code);
-    }, false);
+    document.addEventListener('keypress', (event) => this.playerAction(event.code));
   }
   
   render() {
@@ -34,22 +30,21 @@ class Board extends React.Component {
     let player = this.state.player;
     switch(keyCode){
       case 'KeyW':
-        tempMap = player.moveUp(tempMap);
+        player.moveUp(tempMap);
         break;
       case 'KeyS':
-        tempMap = player.moveDown(tempMap);
+        player.moveDown(tempMap);
         break;
       case 'KeyA':
-        tempMap = player.moveLeft(tempMap);
+        player.moveLeft(tempMap);
         break;
       case 'KeyD':
-        tempMap = player.moveRight(tempMap);
+        player.moveRight(tempMap);
         break;
       default:
-        break;
+        return;
     }
     this.setState({
-      map: tempMap,
       player: player
     });
   }
