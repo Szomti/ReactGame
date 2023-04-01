@@ -117,7 +117,7 @@ body {
   border: #b6b6b6 solid 2px;
 }
 
-.scoreboard-item {
+.leaderboard-item {
   border-radius: 8px;
   margin-bottom: 7px;
 }
@@ -137,7 +137,7 @@ body {
   border: #724e00 solid 2px;
 }
 
-.scoreboard-default {
+.leaderboard-default {
   background: #f0f0f0;
   border: #b6b6b6 solid 2px;
 }

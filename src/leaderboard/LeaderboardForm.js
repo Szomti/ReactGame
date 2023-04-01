@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
-function ScoreboardForm(props) {
+function LeaderboardForm(props) {
     const onSubmitNick = (e) => {
         e.preventDefault();
         let value = document.getElementById('playerNick').value;
@@ -27,4 +27,4 @@ function ScoreboardForm(props) {
     );
 }
 
-export default ScoreboardForm;
+export default LeaderboardForm;

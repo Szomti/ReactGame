@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
-function ScoreboardItem(props) {
+function LeaderboardItem(props) {
     return(
         <div className='container-fluid mb-3 p-2 default-bg'>
-            <p className='text-center h3'>Scoreboard</p>
+            <p className='text-center h3'>Leaderboard</p>
             <div className='row'>
                 <p className='col text-center h5 mb-1'>Player</p>
                 <p className='col text-center h5 mb-1'>Moves</p>
@@ -13,4 +13,4 @@ function ScoreboardItem(props) {
     );
 }
 
-export default ScoreboardItem;
+export default LeaderboardItem;

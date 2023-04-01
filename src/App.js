@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ScoreboardForm from './scoreboard/ScoreboardForm';
-import ScoreboardItem from './scoreboard/ScoreboardItem';
-import ScoreboardHeader from './scoreboard/ScoreboardHeader';
+import LeaderboardForm from './leaderboard/LeaderboardForm';
+import LeaderboardItem from './leaderboard/LeaderboardItem';
+import LeaderboardHeader from './leaderboard/LeaderboardHeader';
 import PlayerTile from './tiles/PlayerTile';
 import Player from './Player';
 import RockTile from './tiles/RockTile';
@@ -22,7 +22,7 @@ class Board extends React.Component {
       player: new Player(1, 1),
       won: false,
       listener: false,
-      scoreboard: [{nick: "Totally Legit Player", moves: 184}, {nick: "Friend", moves: 425}, {nick: "Nowak", moves: 653}, {nick: "KowalskiV1", moves: 813}, {nick: "KowalskiV2", moves: 1041}],
+      leaderboard: [{nick: "Totally Legit Player", moves: 184}, {nick: "Friend", moves: 425}, {nick: "Nowak", moves: 653}, {nick: "KowalskiV1", moves: 813}, {nick: "KowalskiV2", moves: 1041}],
       view: 'menu',
     }
     this.targets = this.countTiles('T');
@@ -45,8 +45,8 @@ class Board extends React.Component {
     return (
       <div className='container-fluid row'>
         <div className='col-3 mt-4 ms-4'>
-          <ScoreboardHeader/>
-          {this.createScoreboard()}
+          <LeaderboardHeader/>
+          {this.createLeaderboard()}
         </div>
         <div className='info col-6'>
           {this.createMainView()}
@@ -55,14 +55,14 @@ class Board extends React.Component {
     );
   }
 
-  addToScoreboard(nick){
-    let tempScoreboard = this.state.scoreboard;
-    tempScoreboard.push({nick: nick, moves: this.state.player.moves})
-    tempScoreboard.sort((a, b) => (a.moves > b.moves) ? 1 : (a.moves < b.moves) ? -1 : 0);
+  addToLeaderboard(nick){
+    let tempLeaderboard = this.state.leaderboard;
+    tempLeaderboard.push({nick: nick, moves: this.state.player.moves})
+    tempLeaderboard.sort((a, b) => (a.moves > b.moves) ? 1 : (a.moves < b.moves) ? -1 : 0);
     this.setState({
       map: new Maps().main,
       player: new Player(1, 1),
-      scoreboard: tempScoreboard,
+      leaderboard: tempLeaderboard,
       view: 'menu',
       won: false
     });
@@ -94,7 +94,7 @@ class Board extends React.Component {
           </>
         );
       case 'end':
-        return (<ScoreboardForm moves={this.state.player.moves} onClick={(nick) => this.addToScoreboard(nick)}/>);
+        return (<LeaderboardForm moves={this.state.player.moves} onClick={(nick) => this.addToLeaderboard(nick)}/>);
       case 'menu':
         return (
         <div className='default-bg container-fluid p-3 mt-3 w-25'>
@@ -106,10 +106,10 @@ class Board extends React.Component {
     }
   }
 
-  createScoreboard() {
+  createLeaderboard() {
     let items = [];
-    this.state.scoreboard.forEach((score, index) => {
-      var rank;
+    this.state.leaderboard.forEach((score, index) => {
+      let rank = 'leaderboard-default';
       switch(index){
         case 0:
           rank = 'gold';
@@ -121,10 +121,9 @@ class Board extends React.Component {
           rank = 'bronze';
           break;
         default:
-          rank = 'scoreboard-default';
           break;
       }
-      items.push(<ScoreboardItem rank={rank} key={index} nickname={score.nick} moves={score.moves}/>);
+      items.push(<LeaderboardItem place={index+1} rank={rank} key={index} nickname={score.nick} moves={score.moves}/>);
     });
     return items;
   }
