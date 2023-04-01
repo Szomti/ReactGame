@@ -16,7 +16,7 @@ function ScoreboardForm(props) {
     }
 
     return(
-        <div className='container-fluid p-5 default-bg w-50'>
+        <div className='container-fluid p-5 mt-3 default-bg w-50'>
             <h3 className='mb-4'>You Won!</h3>
             <p>It took you {props.moves} {impossibleText()}!</p>
             <form>

@@ -96,7 +96,11 @@ class Board extends React.Component {
       case 'end':
         return (<ScoreboardForm moves={this.state.player.moves} onClick={(nick) => this.addToScoreboard(nick)}/>);
       case 'menu':
-        return (<button className='btn btn-primary m-5' onClick={this.startEventListener}>Start</button>)
+        return (
+        <div className='default-bg container-fluid p-3 mt-3 w-25'>
+          <p>Start new game!</p>
+          <button className='btn btn-primary' onClick={this.startEventListener}>Start</button>
+          </div>)
       default:
         return;
     }
@@ -154,7 +158,6 @@ class Board extends React.Component {
       if(this.countTiles('L') === this.targets){
         document.removeEventListener('keypress', this.playerAction);
         this.setState({
-          map: [[]],
           won: true,
           view: 'end',
           listener: false
