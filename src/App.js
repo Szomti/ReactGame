@@ -85,9 +85,11 @@ class Board extends React.Component {
       case 'board':
         return (
           <>
-            <p className='mt-4'>Moves: {this.state.player.moves}</p>
-            <p>Progress: {this.countTiles('L')}/{this.targets}</p>
-            <button className='btn btn-secondary' onClick={this.resetMap}>Reset</button>
+            <div className='default-bg container-fluid p-3 mt-3 w-50'>
+              <p>Moves: {this.state.player.moves}</p>
+              <p>Progress: {this.countTiles('L')}/{this.targets}</p>
+              <button className='btn btn-secondary' onClick={this.resetMap}>Reset</button>
+            </div>
             <div id='board' className='board justify-content-center p-3'>{this.createMap()}</div>
           </>
         );

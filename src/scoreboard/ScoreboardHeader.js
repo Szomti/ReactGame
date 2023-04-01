@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App.css';
 
 function ScoreboardItem(props) {
     return(
-        <div className='container-fluid mb-3'>
+        <div className='container-fluid mb-3 default-bg'>
             <p className='text-center h3'>Scoreboard</p>
             <div className='row'>
                 <p className='col text-center h5'>Nickname</p>

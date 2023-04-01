@@ -1,3 +1,8 @@
+body {
+  background-image: radial-gradient(#010740, #010740 25%, transparent 25%),radial-gradient(ellipse  35% 35% , #7b72ff, #7b72ff 25%, #00204b 25%);
+  background-size: 1em 1em, 3em 3em;
+}
+
 .wall-tile {
   outline: #898989 solid 1px;
   background: #999999;
@@ -106,6 +111,12 @@
 }
 
 .scoreboard-item {
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.default-bg {
+  background: #f0f0f0;
   border-radius: 8px;
   margin-bottom: 5px;
 }

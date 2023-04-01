@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App.css';
 
 function ScoreboardForm(props) {
     const onSubmitNick = (e) => {
@@ -15,9 +16,9 @@ function ScoreboardForm(props) {
     }
 
     return(
-        <div className='container-fluid p-5'>
+        <div className='container-fluid p-5 default-bg w-50'>
             <h3 className='mb-4'>You Won!</h3>
-            <p>It took you {props.moves} {impossibleText}!</p>
+            <p>It took you {props.moves} {impossibleText()}!</p>
             <form>
                 <div><label>Nickname:<br/><input type='text' className='input' id='playerNick'/></label></div>
                 <button className='btn btn-primary mt-2' onClick={onSubmitNick}>Submit</button>
