@@ -1,6 +1,6 @@
 body {
-  background-image: radial-gradient(#010740, #010740 25%, transparent 25%),radial-gradient(ellipse  35% 35% , #7b72ff, #7b72ff 25%, #00204b 25%);
-  background-size: 1em 1em, 3em 3em;
+  background-image: radial-gradient(ellipse  60% 60%, #000b69, #000b69 25%, transparent 30%), radial-gradient(ellipse  30% 30%, #0077df, #0077df 32%, #00368d 20%);
+  background-size: 2em 2em, 6em 6em;
 }
 
 .wall-tile {
