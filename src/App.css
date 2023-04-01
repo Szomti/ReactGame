@@ -110,31 +110,36 @@ body {
   font-size: large;
 }
 
-.scoreboard-item {
-  border-radius: 8px;
-  margin-bottom: 5px;
-}
-
 .default-bg {
   background: #f0f0f0;
   border-radius: 8px;
   margin-bottom: 5px;
+  border: #b6b6b6 solid 2px;
+}
+
+.scoreboard-item {
+  border-radius: 8px;
+  margin-bottom: 7px;
 }
 
 .gold {
   background: #ffe924;
+  border: #d1bf1d solid 2px;
 }
 
 .silver {
   background: #c2c2c2;
+  border: #979797 solid 2px;
 }
 
 .bronze {
   background: #a16e00;
+  border: #724e00 solid 2px;
 }
 
 .scoreboard-default {
   background: #f0f0f0;
+  border: #b6b6b6 solid 2px;
 }
 
 #root {
