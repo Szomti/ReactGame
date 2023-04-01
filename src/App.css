@@ -105,6 +105,27 @@
   font-size: large;
 }
 
+.scoreboard-item {
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.gold {
+  background: #ffe924;
+}
+
+.silver {
+  background: #c2c2c2;
+}
+
+.bronze {
+  background: #a16e00;
+}
+
+.scoreboard-default {
+  background: #f0f0f0;
+}
+
 #root {
   width: 100%;
   display: flex;

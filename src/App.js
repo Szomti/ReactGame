@@ -22,7 +22,7 @@ class Board extends React.Component {
       player: new Player(1, 1),
       won: false,
       listener: false,
-      scoreboard: [{nick: "me", moves: 436}, {nick: "someone", moves: 3452}],
+      scoreboard: [{nick: "Totally Legit Player", moves: 184}, {nick: "Friend", moves: 425}, {nick: "Nowak", moves: 653}, {nick: "KowalskiV1", moves: 813}, {nick: "KowalskiV2", moves: 1041}],
       view: 'menu',
     }
     this.targets = this.countTiles('T');
@@ -103,7 +103,22 @@ class Board extends React.Component {
   createScoreboard() {
     let items = [];
     this.state.scoreboard.forEach((score, index) => {
-      items.push(<ScoreboardItem key={index} nickname={score.nick} moves={score.moves}/>)
+      var rank;
+      switch(index){
+        case 0:
+          rank = 'gold';
+          break;
+        case 1:
+          rank = 'silver';
+          break;
+        case 2:
+          rank = 'bronze';
+          break;
+        default:
+          rank = 'scoreboard-default';
+          break;
+      }
+      items.push(<ScoreboardItem rank={rank} key={index} nickname={score.nick} moves={score.moves}/>);
     });
     return items;
   }
