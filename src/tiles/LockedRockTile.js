@@ -2,8 +2,8 @@ import React from 'react';
 
 function LockedRockTile() {
     return (
-        <div class='tile target-tile'>
-            <div class='locked-rock-tile'></div>
+        <div className='tile target-tile'>
+            <div className='locked-rock-tile'></div>
         </div>
     );
 }

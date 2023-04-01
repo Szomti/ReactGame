@@ -1,7 +1,11 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ScoreboardForm from './scoreboard/ScoreboardForm';
+import ScoreboardItem from './scoreboard/ScoreboardItem';
+import ScoreboardHeader from './scoreboard/ScoreboardHeader';
 import PlayerTile from './tiles/PlayerTile';
-import Player from './Player'
+import Player from './Player';
 import RockTile from './tiles/RockTile';
 import TargetTile from './tiles/TargetTile';
 import LockedRockTile from './tiles/LockedRockTile';
@@ -14,37 +18,103 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      map: Maps.mapA,
+      map: new Maps().main,
       player: new Player(1, 1),
       won: false,
+      listener: false,
+      scoreboard: [{nick: "me", moves: 436}, {nick: "someone", moves: 3452}],
+      view: 'menu',
     }
-    this.targets = this.targetsToWin('T');
-    document.addEventListener('keypress', (event) => {
-      event.preventDefault();
-      this.playerAction(event.code);
+    this.targets = this.countTiles('T');
+    this.startEventListener = this.startEventListener.bind(this);
+    this.playerAction = this.playerAction.bind(this);
+    this.resetMap = this.resetMap.bind(this);
+  }
+
+  startEventListener(e) {
+    e.preventDefault();
+    if(this.state.listener) return;
+    document.addEventListener('keypress', this.playerAction);
+    this.setState({
+      listener: true,
+      view: 'board'
     });
   }
   
   render() {
     return (
-      <>
-        <div class='info'>
-          <p>Moves: {this.state.player.moves}</p>
-          <p>Progress: {this.targetsToWin('L')}/{this.targets}</p>
+      <div className='container-fluid row'>
+        <div className='col-3 mt-4 ms-4'>
+          <ScoreboardHeader/>
+          {this.createScoreboard()}
         </div>
-        <div class='board'>
-          {this.createMap()}
+        <div className='info col-6'>
+          {this.createMainView()}
         </div>
-      </>
+      </div>
     );
   }
 
-  playerAction(keyCode) {
+  addToScoreboard(nick){
+    let tempScoreboard = this.state.scoreboard;
+    tempScoreboard.push({nick: nick, moves: this.state.player.moves})
+    tempScoreboard.sort((a, b) => (a.moves > b.moves) ? 1 : (a.moves < b.moves) ? -1 : 0);
+    this.setState({
+      map: new Maps().main,
+      player: new Player(1, 1),
+      scoreboard: tempScoreboard,
+      view: 'menu',
+      won: false
+    });
+  }
+
+  resetMap(e) {
+    e.preventDefault();
+    document.removeEventListener('keypress', this.playerAction);
+    this.setState({
+      map: new Maps().main,
+      player: new Player(1, 1),
+      won: true,
+      view: 'menu',
+      listener: false
+    });
+  }
+
+  createMainView() {
+    switch(this.state.view){
+      case 'board':
+        return (
+          <>
+            <p className='mt-4'>Moves: {this.state.player.moves}</p>
+            <p>Progress: {this.countTiles('L')}/{this.targets}</p>
+            <button className='btn btn-secondary' onClick={this.resetMap}>Reset</button>
+            <div id='board' className='board justify-content-center p-3'>{this.createMap()}</div>
+          </>
+        );
+      case 'end':
+        return (<ScoreboardForm moves={this.state.player.moves} onClick={(nick) => this.addToScoreboard(nick)}/>);
+      case 'menu':
+        return (<button className='btn btn-primary m-5' onClick={this.startEventListener}>Start</button>)
+      default:
+        return;
+    }
+  }
+
+  createScoreboard() {
+    let items = [];
+    this.state.scoreboard.forEach((score, index) => {
+      items.push(<ScoreboardItem key={index} nickname={score.nick} moves={score.moves}/>)
+    });
+    return items;
+  }
+
+  playerAction(event) {
     let tempMap = this.state.map;
     let player = this.state.player;
     
     let forUpdate = player.moves;
-    switch(keyCode){
+    event.preventDefault();
+    switch(event.code){
       case 'KeyW':
         player.moveUp(tempMap);
         break;
@@ -64,13 +134,19 @@ class Board extends React.Component {
       this.setState({
         player: player
       });
-      if(this.targetsToWin('L') == this.targets){
-        alert('You Won!');
+      if(this.countTiles('L') === this.targets){
+        document.removeEventListener('keypress', this.playerAction);
+        this.setState({
+          map: [[]],
+          won: true,
+          view: 'end',
+          listener: false
+        });
       }
     }
   }
 
-  targetsToWin(search) {
+  countTiles(search) {
     let count = 0;
     this.state.map.forEach(row => {
       count += row.filter(tile => tile === search).length;

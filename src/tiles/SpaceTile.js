@@ -2,7 +2,7 @@ import React from 'react';
 
 function SpaceTile() {
   return (
-    <div class='tile space-tile'></div>
+    <div className='tile space-tile'></div>
   );
 }
 

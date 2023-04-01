@@ -38,7 +38,7 @@
 }
 
 .target-tile {
-  background: #ffa5a5;
+  background: #FFDFDF;
   font-family: Courier, monospace;
   font-weight: bold;
   font-size: x-large;
@@ -92,7 +92,6 @@
 }
 
 .board {
-  padding: 20px;
   display: grid;
   grid-template-columns: repeat(20, 30px);
   align-self: center;

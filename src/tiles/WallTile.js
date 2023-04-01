@@ -2,7 +2,7 @@ import React from 'react';
 
 function WallTile() {
     return (
-        <div class='tile wall-tile'></div>
+        <div className='tile wall-tile'></div>
     );
 }
 

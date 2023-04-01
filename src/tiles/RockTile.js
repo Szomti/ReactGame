@@ -2,8 +2,8 @@ import React from 'react';
 
 function RockTile() {
     return (
-        <div class='tile space-tile'>
-        <div class='rock-tile'></div>
+        <div className='tile space-tile'>
+        <div className='rock-tile'></div>
         </div>
     );
 }

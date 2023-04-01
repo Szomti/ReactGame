@@ -2,7 +2,7 @@ import React from 'react';
 
 function FakeWallTile() {
     return (
-        <div class='tile fake-wall-tile'></div>
+        <div className='tile fake-wall-tile'></div>
     );
 }
 
