@@ -28,3 +28,8 @@
 - Jak najprostszy wygląd faktycznej gry bez ładowania zdjęć
 - W pełni samodzielnie wykonane elementry gry
 - Oznaczenie pierwszych 3 miejsc w tabeli wyników
+- Menu, to tekst z przyciskiem start
+- Brak specjalnego fontu
+
+## O grze
+Poruszasz się używając wsad. Przy użyciu myszki można najeżdżać na kratki, dzięki czemu można odkryć fałszywe ścieny, przez które można przechodzić albo przepychać bloki. Twoim zadaniem jest ustawienia na zaznaczonych polach wszystkich kamieni. W grze nie ma opcji ciągnięcia bloków, więc jeśli źle popchniesz blok, to być może, będziesz musiał zrestartować grę. Po ukończeniu będziesz musiał podać własną nazwę, żeby wyświetlić ją na tabeli wyników.
